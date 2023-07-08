@@ -1,0 +1,9 @@
+{
+    "cmake.configureOnOpen": false,
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "unordered_map": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp"
+    }
+}

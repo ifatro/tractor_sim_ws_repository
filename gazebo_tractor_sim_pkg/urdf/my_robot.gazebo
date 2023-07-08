@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!-- camera -->
+  <gazebo reference="camera">
+    <sensor type="camera" name="camera1">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>camera</cameraName>
+        <imageTopicName>rgb/image_raw</imageTopicName>
+        <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+        <frameName>camera</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+ 
+
+  
+  
+  
+    <gazebo>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>robot_footprint</bodyName>
+      <topicName>imu</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <updateRate>100.0</updateRate>
+    </plugin>
+  </gazebo>
+  
+  
+
+  <!--
+  <gazebo>
+  <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+    <updateRate>100.0</updateRate>
+    <robotNamespace>/</robotNamespace>
+    <leftFrontJoint>left_wheel_hinge</leftFrontJoint>
+    <rightFrontJoint>right_wheel_hinge</rightFrontJoint>
+    <leftRearJoint>left_wheel_2_hinge</leftRearJoint>
+    <rightRearJoint>right_wheel_2_hinge</rightRearJoint>
+    <wheelSeparation>0.4</wheelSeparation>
+    <wheelDiameter>0.215</wheelDiameter>
+    <robotBaseFrame>robot_footprint</robotBaseFrame>
+    <torque>20</torque>
+    <topicName>cmd_vel</topicName>
+    <broadcastTF>false</broadcastTF>
+  </plugin>
+</gazebo>
+-->
+
+  
+  <gazebo>
+  <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+    <alwaysOn>true</alwaysOn>
+    <updateRate>50.0</updateRate>
+    <bodyName>robot_footprint</bodyName>
+    <topicName>ground_truth/state</topicName>
+    <gaussianNoise>0.01</gaussianNoise>
+    <frameName>world</frameName>
+    <xyzOffsets>0 0 0</xyzOffsets>
+    <rpyOffsets>0 0 0</rpyOffsets>
+  </plugin>
+</gazebo>
+
+         <gazebo>
+         <plugin name="hector_gps" filename="libhector_gazebo_ros_gps.so">
+           <robotNamespace>/my_robot_model</robotNamespace>
+           <updateRate>50.0</updateRate>
+           <bodyName>robot_footprint</bodyName>
+           <frameId>map</frameId>
+           <topicName>gps</topicName>
+           <velocityTopicName>gps/velocity</velocityTopicName>
+         </plugin>
+       </gazebo>     
+  <!-- ROS Control plugin for Gazebo -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/my_robot_model</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>
+
+  <!-- Color Model In Gazebo -->
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="left_wheel_2">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel_2">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="camera">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="chasis">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+
+</robot>

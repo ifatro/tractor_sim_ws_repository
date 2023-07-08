@@ -1,0 +1,176 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="my_robot">
+  <static>false</static>
+   <link name='chassis'>
+    <pose>0 0 .2 0 0 0</pose>
+
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>1 .5 .20</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <geometry>
+         <box>
+           <size>1 .5 .20</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+      <link name="left_wheel_1">
+        <pose>0.37 0.31 0.2 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.2</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.2</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+      <link name="left_wheel_2">
+        <pose>-0.37 0.31 0.2 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.2</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.2</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+
+     <link name="right_wheel_1">
+        <pose>0.37 -0.31 0.2 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.2</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.2</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+     <link name="right_wheel_2">
+        <pose>-0.37 -0.31 0.2 0 1.5707 1.5707</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.2</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.2</radius>
+              <length>.05</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+      <joint type="revolute" name="left_wheel_1_hinge">
+        <pose>0 0 -0.03 0 0 0</pose>
+        <child>left_wheel_1</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+        </axis>
+      </joint>
+
+      <joint type="revolute" name="right_wheel_1_hinge">
+        <pose>0 0 0.03 0 0 0</pose>
+        <child>right_wheel_1</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+        </axis>
+      </joint>
+      <joint type="revolute" name="left_wheel_2_hinge">
+        <pose>0 0 -0.03 0 0 0</pose>
+        <child>left_wheel_2</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+        </axis>
+      </joint>
+
+      <joint type="revolute" name="right_wheel_2_hinge">
+        <pose>0 0 0.03 0 0 0</pose>
+        <child>right_wheel_2</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+        </axis>
+      </joint>
+  <link name='driver_box'>
+    <pose>-0.2 0 .4 0 0 0</pose>
+
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>0.4 .35 .30</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name='visual'>
+        <geometry>
+         <box>
+           <size>0.4 .35 .30</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+     <link name="exhaust_pipe">
+        <pose>0.35 0.17 0.4 0 0 1</pose>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.03</radius>
+              <length>.5</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.03</radius>
+              <length>.4</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+
+  </model>
+</sdf>
+

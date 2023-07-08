@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+  <!-- Robot pose -->
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="1.5708"/>
+
+
+  <!-- World File -->
+  <arg name="world_file" default="$(find gazebo_tractor_sim_pkg)/world/empty.world"/>
+
+  <!-- Launch Gazebo World -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="gui" value="true" />
+    <arg name="world_name" value="$(arg world_file)"/>
+  </include>
+
+  <!-- Find my robot Description-->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find gazebo_tractor_sim_pkg)/urdf/my_robot.xacro'"/>
+
+  <!-- Spawn My Robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-urdf -param robot_description -model gazebo_tractor_sim_pkg
+              -x $(arg x) -y $(arg y) -z $(arg z)
+              -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
+
+  <!-- load the controllers -->
+  <rosparam file="$(find gazebo_tractor_sim_pkg)/config/config.yaml" command="load"/>
+  <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="/my_robot_model"
+        args="right_wheel_hinge_joint_velocity_controller left_wheel_hinge_joint_velocity_controller
+              right_wheel_2_hinge_joint_velocity_controller left_wheel_2_hinge_joint_velocity_controller
+              camera_shaft_joint_position_controller
+              joint_state_controller"/>
+
+
+  <!-- Send robot states to tf -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="joint_states" to="/my_robot_model/joint_states" />
+  </node>
+
+
+</launch>
