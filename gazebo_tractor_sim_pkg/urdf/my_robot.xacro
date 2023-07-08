@@ -47,7 +47,7 @@
     <collision name='left_wheel_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.2" length="0.09"/>
+        <cylinder radius="0.2" length="0.1"/>
       </geometry>
     </collision>
 
@@ -64,7 +64,7 @@
     <visual name='left_wheel_visual'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.2" length="0.09"/>
+        <cylinder radius="0.2" length="0.1"/>
       </geometry>
     </visual>
 
@@ -75,7 +75,7 @@
     <collision name='right_wheel_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.2" length="0.09"/>
+        <cylinder radius="0.2" length="0.1"/>
       </geometry>
     </collision>
 
@@ -92,7 +92,7 @@
     <visual name='right_wheel_visual'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.2" length="0.09"/>
+        <cylinder radius="0.2" length="0.1"/>
       </geometry>
     </visual>
 
@@ -103,7 +103,7 @@
     <collision name='left_wheel_2_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.2" length="0.09"/>
+        <cylinder radius="0.2" length="0.1"/>
       </geometry>
     </collision>
 
@@ -120,7 +120,7 @@
     <visual name='left_wheel_2_visual'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.2" length="0.09"/>
+        <cylinder radius="0.2" length="0.1"/>
       </geometry>
     </visual>
 
@@ -130,7 +130,7 @@
     <collision name='right_wheel_2_collision'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.2" length="0.09"/>
+        <cylinder radius="0.2" length="0.1"/>
       </geometry>
     </collision>
 
@@ -147,7 +147,7 @@
     <visual name='right_wheel_2_visual'>
       <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
       <geometry>
-        <cylinder radius="0.2" length="0.09"/>
+        <cylinder radius="0.2" length="0.1"/>
       </geometry>
     </visual>
 

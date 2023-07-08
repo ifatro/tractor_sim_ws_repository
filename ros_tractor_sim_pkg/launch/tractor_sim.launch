@@ -5,14 +5,14 @@
   <node name="robot_control_node" pkg="tractor_sim_pkg" type="robot_control_node" />
   <node name="robot_path_planning_node" pkg="tractor_sim_pkg" type="robot_path_planning_node" />
   <node name="sim_ground_truth_node" pkg="tractor_sim_pkg" type="sim_ground_truth_node" />
-  <!--
+
   <param name="MAX_TOURQE" type="double" value="70.0" />
   <param name="MIN_TOURQE" type="double" value="25.0" />
   <param name="ACCELERATION_TIME" type="double" value="10.0" />
   <param name="BEARING_ERROR" type="double" value="1.0" />
   <param name="DISTANCE_ERROR" type="double" value="1.0" />
   <param name="DECELERATION_DISTANCE" type="double" value="30.0" />
-  <param name="MIN_TOURQE_DECELERATIN" type="double" value="10.0" />  -->
+  <param name="MIN_TOURQE_DECELERATIN" type="double" value="10.0" />  
   <rosparam>
   robot_pose_status: 1
   target_pose_status: 2

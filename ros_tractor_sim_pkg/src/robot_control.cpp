@@ -82,8 +82,7 @@ public:
     mIn_turn.data = false;
     mWheelRadius = 0.05;
     mTimeAtAheadDriveStart = ros::Time::now();
-    mCount2 = 0;
-    mCount3 = 0;
+
     return mIsAlive;
     SAMPLE_TIME=0.033;
     mLastVel=0;
@@ -109,8 +108,6 @@ private:
   bool mIsAlive;
   bool mStartDrivingAhead;
   int mCount;
-  int mCount2;
-  int mCount3;
   double mWheelRadius;
   ros::Time mTimeAtAheadDriveStart;
   double  MAX_TOURQE ;
@@ -142,7 +139,7 @@ private:
         mStartDrivingAhead = false;
       }
 
-      if (abs(abs(mBearing_cmd) - abs(mBearing_imu_meas)) > BEARING_ERROR && !mStartDrivingAhead) // turn to bearing angle
+      if (abs(fmod(mBearing_cmd - mBearing_imu_meas, 360)) > BEARING_ERROR && !mStartDrivingAhead) // turn to bearing angle
       {
         mCount = 0;
         mIn_turn.data = true;
@@ -185,7 +182,7 @@ private:
     {
       if (mCurr_distance.data +  DECELERATION_DISTANCE < mDistance_cmd.data) //max torque while distance to target > 5[meter]
       {
-        mCount2 = 0;
+
         if (dt <= ACCELERATION_TIME) //acceleration
         {
           mVel_cmd_left.data = std::min(MIN_TOURQE+ ANGULAR_ACCELERATION * dt, MAX_TOURQE);
@@ -201,7 +198,7 @@ private:
       {
         mVel_cmd_left.data =std::max(mVel_cmd_left.data - 2*ANGULAR_ACCELERATION  * 0.03, MIN_TOURQE);
         mVel_cmd_right.data =std::max(mVel_cmd_right.data - 2*ANGULAR_ACCELERATION  * 0.03, MIN_TOURQE);
-        mCount2++;
+
       }
     }
     else //stop
@@ -223,11 +220,11 @@ private:
     {
       mVel_cmd_left.data = mVel_cmd_left.data - 2*ANGULAR_ACCELERATION  * 0.03;
       mVel_cmd_right.data = mVel_cmd_left.data -2*ANGULAR_ACCELERATION  * 0.03;
-      mCount3++;
+
     }
-    else
+    else  // turn to the bearing angle command
     {
-      mCount3 = 0;
+
 
       if (abs(mBearing_cmd - mBearing_imu_meas) < 180)
       {
@@ -268,15 +265,23 @@ private:
 
   void path_callback(const geometry_msgs::Pose2D &msg)
   {
-    mBearing_cmdPrev = mBearing_cmd;
-    // float64 x
-    // float64 y
-    // float64 theta
-    // path planning  bearing command
-    mBearing_cmd = msg.theta;
-    mDistance_cmd.data = msg.x;
-    mXinit = mX;
-    mYinit = mY;
+    if (msg.x <= 500) // legal command
+    {
+      mBearing_cmdPrev = mBearing_cmd;
+      // float64 x
+      // float64 y
+      // float64 theta
+      // path planning  bearing command
+      mBearing_cmd = msg.theta;
+      mDistance_cmd.data = msg.x;
+      mXinit = mX;
+      mYinit = mY;
+    }
+    else
+    {
+      mBearing_cmd = mBearing_imu_meas;
+      mDistance_cmd.data = 0;
+    }
   }
 
   void bearing_imu_callback(const std_msgs::Float64 &msg)
