@@ -40,30 +40,35 @@ Implementation
 ----------------------------------------
 The simulation is implemented using the following 5 ROS nodes, each node has a different functionality and connections to other nodes:
 
-Node
-class file
-Brief description of functionality
+
 GUI
-main.python
-The node receives the robot and target locations (wgs84) and draws them on a geographic map.
+----------------------------------------
+main.python - The node receives the robot and target locations (wgs84) and draws them on a geographic map.
+
 robot_path_planning_node
+----------------------------------------
+- The node calculates the robot bearing angle and distance to the required target.
 10[Hz]
 robot_path_planning.cpp
-The node calculates the robot bearing angle and distance to the required target.
+
+
 robot_navigation_node
+----------------------------------------
+The node receives the IMU measurements and extracts the robot full odometry (angular & linear).
 100[Hz]
 robot_navigation.cpp
-The node receives the IMU measurements and extracts the robot full odometry (angular & linear).
+
 robot_control_node
+--------------------------------------
 30[Hz]
 robot_control.cpp
 The node receives the required robot’s path from the path planner node and the robot’s odometry from the robot’s navigation node and calculates the commands to the controller wheels.  
+
 sim_ground_truth_node*
+----------------------
 10[Hz]
 robot_sim_ground_truth.cpp
 The node receives the robot ground truth odometry and calculates the robot's true location to be drawn in the GUI app.
-
-
 *The sim_ground_truth_node is not connected to the robot’s nodes (navigation, control, path planning) and serves only to present the robot’s true location on the GUI geographic map.
 
 
