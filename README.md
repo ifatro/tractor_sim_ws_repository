@@ -62,32 +62,28 @@ The node receives the robot ground truth odometry and calculates the robot's tru
 
 Publishers and subscribers of each node:
 ----------------------------------------
-/target_location
-/robot_location
-/robot_path_planning_node
-/robot_target_path
-/robot_estimated_location
-/in_turn
-/robot_navigation_node
-/robot_estimated_location
-/robot_odometry
-/robot_bearing_imu
-/imu
-/robot_control_node
-/left_wheel_2_hinge_joint_velocity_controller/command
-/left_wheel_hinge_joint_velocity_controller/command
-/right_wheel_2_hinge_joint_velocity_controller/command
-/right_wheel_hinge_joint_velocity_controller/command
-/curr_dist
-/cmd_dist
-/time_from_start_driving_ahead
-/in_turn
-/robot_target_path
-/robot_odometry
-/robot_bearing_imu
-/sim_ground_truth_node
-/robot_location
-/ground_truth/state
+/target_location;
+/robot_location;
+/robot_path_planning_node;
+/robot_target_path;
+/robot_estimated_location;
+/in_turn;
+/robot_navigation_node;
+/robot_estimated_location;
+/robot_odometry;
+/robot_bearing_imu;
+/imu;
+/robot_control_node;
+/left_wheel_2_hinge_joint_velocity_controller/command;
+/left_wheel_hinge_joint_velocity_controller/command;
+/right_wheel_2_hinge_joint_velocity_controller/command;
+/right_wheel_hinge_joint_velocity_controller/command;
+/curr_dist;
+/cmd_dist;
+/time_from_start_driving_ahead;
+/in_turn;
+/sim_ground_truth_node;
+/ground_truth/state;
 
 Simulation compilation
 ----------------------------------------
