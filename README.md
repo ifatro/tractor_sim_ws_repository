@@ -23,7 +23,8 @@ plugin.
 
 Source code 
 ----------------------------------------
-The source code can be found in the gitHub repository tractor_sim_ws_repository in the following link:https://github.com/ifatro/tractor_sim_ws_repository.git
+The source code can be found in the gitHub repository tractor_sim_ws_repository in the following link:
+https://github.com/ifatro/tractor_sim_ws_repository.git
 
 The source code includes:
 
