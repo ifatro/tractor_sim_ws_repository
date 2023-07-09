@@ -59,7 +59,7 @@ private:
     {
       ros::spinOnce();
 
-      // calculate ground truth of the robot location from initial position:
+      // calculate ground truth of the robot location from an initial position:
 
       mRobot_true_location = calc_ikun(INITIAL_ROBOT_LAT, INITIAL_ROBOT_LON, mBearing, mDistance);
 
