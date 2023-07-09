@@ -47,30 +47,30 @@ main.python - The node receives the robot and target locations (wgs84) and draws
 
 robot_path_planning_node
 ----------------------------------------
-The node calculates the robot bearing angle and distance to the required target;    
-Rate: 10[Hz]
-file: robot_path_planning.cpp
+The node calculates the robot bearing angle and distance to the required target.  
+Rate: 10[Hz].
+file: robot_path_planning.cpp.
 
 
 robot_navigation_node
 ----------------------------------------
-The node receives the IMU measurements and extracts the robot full odometry (angular & linear);
-Rate:100[Hz]
-file:robot_navigation.cpp
+The node receives the IMU measurements and extracts the robot full odometry (angular & linear).
+Rate:100[Hz].
+file:robot_navigation.cpp.
 
 robot_control_node
 --------------------------------------
-The node receives the required robot’s path from the path planner node and the robot’s odometry from the robot’s navigation node and calculates the commands to the controller wheels;
-Rate:30[Hz]
-file:robot_control.cpp
+The node receives the required robot’s path from the path planner node and the robot’s odometry from the robot’s navigation node and calculates the commands to the controller wheels.
+Rate:30[Hz].
+file:robot_control.cpp.
 
 
 sim_ground_truth_node*
 ----------------------
-The node receives the robot ground truth odometry and calculates the robot's true location to be drawn in the GUI app;
-*The sim_ground_truth_node is not connected to the robot’s nodes (navigation, control, path planning) and serves only to present the robot’s true location on the GUI geographic map;
-Rate:10[Hz]
-file:robot_sim_ground_truth.cpp
+The node receives the robot ground truth odometry and calculates the robot's true location to be drawn in the GUI app
+*The sim_ground_truth_node is not connected to the robot’s nodes (navigation, control, path planning) and serves only to present the robot’s true location on the GUI geographic map.
+Rate:10[Hz].
+file:robot_sim_ground_truth.cpp.
 
 
 
