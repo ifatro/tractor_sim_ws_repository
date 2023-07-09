@@ -62,10 +62,6 @@ The node receives the robot ground truth odometry and calculates the robot's tru
 
 Publishers and subscribers of each node:
 ----------------------------------------
-Node
-Publishers
-Subscribers
-GUI
 target_location
 robot_location
 robot_path_planning_node
@@ -92,8 +88,6 @@ robot_bearing_imu
 sim_ground_truth_node
 robot_location
 ground_truth/state
-----------------------------------------
-
 
 Simulation compilation
 ----------------------------------------
