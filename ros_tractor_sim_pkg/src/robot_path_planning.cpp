@@ -89,6 +89,9 @@ private:
   {
     mIn_turn = msg.data;
   }
+
+
+private:
   //===================================
   //	Member Variables
   //===================================
@@ -98,8 +101,6 @@ private:
   geographic_msgs::GeoPoint mRobot_init_location;
   geographic_msgs::GeoPoint mTarget_location;
   bool mIn_turn;
-
-private:
 };
 
 int main(int argc, char **argv)

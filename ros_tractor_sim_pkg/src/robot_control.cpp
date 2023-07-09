@@ -296,7 +296,7 @@ private:
     mY = msg.pose.pose.position.y;
   }
 
-private:
+
 };
 
 int main(int argc, char **argv)
