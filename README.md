@@ -133,7 +133,7 @@ The simulation was developed for Ubuntu 20.04  with ROS noetic.
 In order to run the simulation it is needed to launch the couple of  the launch files:
 world.launch - launches the tractor model and the world in the gazebo environment.
 tractor_sim.launch - launches the ROS noes, parameters and GUI.
-Then both the GAZEBO and the GUI are opened and the simulation can be run.
+Then both the GAZEBO and the GUI are opened and the simulation can run.
 
 
 
