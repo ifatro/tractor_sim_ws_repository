@@ -1,17 +1,23 @@
 Simulation description
 ----------------------------------------
 
-The simulation implements a four wheel skid driving control robot that receives a geographic point command ([latitude longitude] ; wgs84) from the GUI prompt, then it plans a path including the distance[meter] and the bearing angle[deg] from the current pose of the robot, to the requested geographic point and drives towards it with a distance error<1[meter].
-
-The robot is able to receive a new setpoint over the course of driving to a current setpoint command, in this case the robot will stop the path to the current command after decelerating, calculate the path to the updated target and send a command to the wheels.
-
-The 4 wheeled robot has a controlled driving system that converts distance[meter] and bearing[deg] commands to torque commands [rad/sec] with acceleration and deceleration logic.
-
-The robot receives its full odometry from a simulated IMU that serves as the Robot’s main sensor and feedback to the control.
-
-The SERVO control of the robot from the torque command to the actual movement of the robot wheels is implemented in a  GAZEBO plug (hinge joints velocity controllers). 
-
-The navigation of the robot includes an IMU that is also implemented from a GAZEBO plugin.
+The simulation implements a four wheel skid driving control robot that receives a geographic
+point command ([latitude longitude]-wgs84) from the GUI prompt, then it plans a path to the
+target that includes the distance[meter] and the bearing angle[deg] from the current pose of
+the robot to the requested geographic point of the target and drives towards it with a
+distance error<1[meter].
+The robot is able to receive a new setpoint over the course of driving to a current setpoint
+command, in this case the robot stops the path to the current command after decelerating,
+calculates the path to the updated target and sends a command to the wheels.
+The 4 wheeled robot has a controlled driving system that converts distance[meter] and
+bearing[deg] commands to torque commands [rad/sec] with an acceleration and deceleration
+simplified logic.
+The robot receives its full odometry from a simulated IMU that serves as the Robot’s main
+sensor and feedback to the control.
+The SERVO control of the robot from the torque command to the actual movement of the
+robot wheels is implemented as a GAZEBO plugin (hinge joints velocity controllers).
+The navigation of the robot includes an IMU that is also implemented from a GAZEBO
+plugin.
 
    
 
