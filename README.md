@@ -1,7 +1,7 @@
 Simulation description
 ----------------------------------------
 
-The simulation implements a four wheel skid driving control robot that receives a geographic point command ([latitude longitude] ; wgs84) from the GUI prompt, than it plans a path including the distance[meter] and the bearing angle[deg] from the current pose of the robot, to the requested geographic point and drives towards it with a distance error<1[meter].
+The simulation implements a four wheel skid driving control robot that receives a geographic point command ([latitude longitude] ; wgs84) from the GUI prompt, then it plans a path including the distance[meter] and the bearing angle[deg] from the current pose of the robot, to the requested geographic point and drives towards it with a distance error<1[meter].
 
 The robot is able to receive a new setpoint over the course of driving to a current setpoint command, in this case the robot will stop the path to the current command after decelerating, calculate the path to the updated target and send a command to the wheels.
 
