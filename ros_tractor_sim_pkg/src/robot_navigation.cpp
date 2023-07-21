@@ -86,7 +86,7 @@ public:
       msg.status.status = 1;
       msg.header.stamp = ros::Time::now();
       msg.position_covariance_type = int(0);
-      double Bearing1 = atan2(mY_est, mX_est);
+      double Bearing1 = atan2(-mY_est, mX_est);
       mRobot_est_location = calc_ikun(INITIAL_ROBOT_LAT, INITIAL_ROBOT_LON, Bearing1, mDistance_est);
       msg.status.status = 1;
       msg.header.stamp = ros::Time::now();
@@ -121,7 +121,7 @@ public:
     double dt = msg.header.stamp.toSec() - mImuTimeprev;
     mYawmeasImu = (tf::getYaw(msg.orientation)) * RAD2DEG;
     std_msgs::Float64 pub_msg;
-    pub_msg.data = mYawmeasImu+180;
+    pub_msg.data = mYawmeasImu;
     robot_bearing_pub.publish(pub_msg);
 
     nav_msgs::Odometry imu_extract;

@@ -86,7 +86,7 @@ private:
   void ground_truth_callback(const nav_msgs::Odometry &msg)
   {
 
-    mBearing = atan2(msg.pose.pose.position.y, msg.pose.pose.position.x);
+    mBearing = atan2(-msg.pose.pose.position.y, msg.pose.pose.position.x);
     mDistance = sqrt(pow(msg.pose.pose.position.x, 2) + pow(msg.pose.pose.position.y, 2));
     mYaw_groungTruth = (tf::getYaw(msg.pose.pose.orientation)) * RAD2DEG;
     std_msgs::Float64 robot_yaw;

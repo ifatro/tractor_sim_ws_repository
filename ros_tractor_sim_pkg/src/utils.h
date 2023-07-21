@@ -46,7 +46,7 @@ double calc_bearing(double lat1, double lon1, double lat2, double lon2)
     double y = sin(delta2) * cos(teta2);
     double x = cos(teta1) * sin(teta2) - sin(teta1) * cos(teta2) * cos(delta2);
     double brng;
-    brng = atan2(y, x);
+    brng = atan2(-y, x);
     brng = RAD2DEG * (brng); // radians to degrees
     //brng = ( ((int)brng + 360) % 360 )-180;
     return brng;
