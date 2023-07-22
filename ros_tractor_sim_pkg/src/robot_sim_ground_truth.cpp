@@ -30,7 +30,6 @@ public:
     std::thread publishing{&sim_ground_truth::mainLoop, this};
     publishing.join();
   }
-
   bool onInit()
   {
     mIsAlive = true;
@@ -62,7 +61,6 @@ private:
       // calculate ground truth of the robot location from an initial position:
 
       mRobot_true_location = calc_ikun(INITIAL_ROBOT_LAT, INITIAL_ROBOT_LON, mBearing, mDistance);
-
       sensor_msgs::NavSatFix msg;
       msg.status.status = 1;
       msg.header.stamp = ros::Time::now();
@@ -82,10 +80,8 @@ private:
   //***********************************
   // Callback functions
   //***********************************
-
   void ground_truth_callback(const nav_msgs::Odometry &msg)
   {
-
     mBearing = atan2(-msg.pose.pose.position.y, msg.pose.pose.position.x);
     mDistance = sqrt(pow(msg.pose.pose.position.x, 2) + pow(msg.pose.pose.position.y, 2));
     mYaw_groungTruth = (tf::getYaw(msg.pose.pose.orientation)) * RAD2DEG;

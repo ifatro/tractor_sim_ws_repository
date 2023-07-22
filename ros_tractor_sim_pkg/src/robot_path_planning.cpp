@@ -64,7 +64,6 @@ private:
         robot2target_pose.y = distance; //*sin(robot2target_pose.theta);
         robot_target_path_pub.publish(robot2target_pose);
       }
-
       rate.sleep();
     }
   }
@@ -89,8 +88,6 @@ private:
   {
     mIn_turn = msg.data;
   }
-
-
 private:
   //===================================
   //	Member Variables
@@ -108,14 +105,12 @@ int main(int argc, char **argv)
 
   ros::init(argc, argv, "robot_path_planning_node");
   ros::NodeHandle node_handle;
-
   // robot initial position:
   geographic_msgs::GeoPoint robot_init_location;
   robot_init_location.latitude = INITIAL_ROBOT_LAT;
   robot_init_location.longitude = INITIAL_ROBOT_LON;
   path_planning tractor_path_planning = path_planning(&node_handle, robot_init_location);
   bool isAlive = tractor_path_planning.onInit();
-
   ros::spin();
   return 0;
 }

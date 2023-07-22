@@ -117,13 +117,11 @@ public:
 
   void imu_callback(const sensor_msgs::Imu &msg)
   {
-
     double dt = msg.header.stamp.toSec() - mImuTimeprev;
     mYawmeasImu = (tf::getYaw(msg.orientation)) * RAD2DEG;
     std_msgs::Float64 pub_msg;
     pub_msg.data = mYawmeasImu+180;
     robot_bearing_pub.publish(pub_msg);
-
     nav_msgs::Odometry imu_extract;
     imu_extract.header.frame_id = "world";
     imu_extract.header.stamp = ros::Time::now();
@@ -142,7 +140,6 @@ public:
     mXprev = imu_extract.pose.pose.position.x;
     mYprev = imu_extract.pose.pose.position.y;
     mZprev = imu_extract.pose.pose.position.z;
-
     ////////////////////////////////////////
     // temporary (because the IMU is very noisy in acceleration)
     imu_extract.pose.pose.position.x = mX_est;
@@ -150,11 +147,8 @@ public:
     ////////////////////////////////////////
     mImuTimeprev = msg.header.stamp.toSec();
     robot_odometry_pub.publish(imu_extract);
-
-
- 
   }
-
+  
   void in_turn_callback(const std_msgs::Bool &msg)
   {
     m_in_turn = msg.data;
@@ -162,7 +156,6 @@ public:
   //===================================
   //	Member Variables
   //===================================
-
 };
 
 int main(int argc, char **argv)
