@@ -35,17 +35,18 @@ public:
   {
 
 
-    if(!node_handle->getParam("/MAX_TOURQE",MAX_TOURQE )) MAX_TOURQE=70.0;
-    if(!node_handle->getParam("/MIN_TOURQE",MIN_TOURQE )) MIN_TOURQE=25.0;
-    if(!node_handle->getParam("/ACCELERATION_TIME",ACCELERATION_TIME )) ACCELERATION_TIME=10.0;
-    if(!node_handle->getParam("/BEARING_ERROR",BEARING_ERROR )) BEARING_ERROR=1.0;
-    if(!node_handle->getParam("/DISTANCE_ERROR",DISTANCE_ERROR )) DISTANCE_ERROR=1.0;
-    if(!node_handle->getParam("/DECELERATION_DISTANCE",DECELERATION_DISTANCE )) DECELERATION_DISTANCE=30.0;
-    if(!node_handle->getParam("/MIN_TOURQE_DEACCELERATIN",MIN_TOURQE_DEACCELERATIN )) MIN_TOURQE_DEACCELERATIN=10.0;
+    if(!node_handle->getParam("/MAX_TOURQE",MAX_TOURQE )) MAX_TOURQE=70.0; /*maximum wheel roatation [rad/sec]*/ 
+    if(!node_handle->getParam("/MIN_TOURQE",MIN_TOURQE )) MIN_TOURQE=25.0; /*minimum wheel roatation [rad/sec]*/ 
+    if(!node_handle->getParam("/ACCELERATION_TIME",ACCELERATION_TIME )) ACCELERATION_TIME=10.0; /*acceleration time from minimum to maxumum tourqe [sec]*/ 
+    if(!node_handle->getParam("/BEARING_ERROR",BEARING_ERROR )) BEARING_ERROR=1.0;/*allowed error from measured bearing to command[deg]*/ 
+    if(!node_handle->getParam("/DISTANCE_ERROR",DISTANCE_ERROR )) DISTANCE_ERROR=1.0; /*allowed distance error to target point [meter]*/ 
+    if(!node_handle->getParam("/DECELERATION_DISTANCE",DECELERATION_DISTANCE )) DECELERATION_DISTANCE=30.0; /*distance of starting deceleration [meter]*/ 
+    if(!node_handle->getParam("/MIN_TOURQE_DEACCELERATIN",MIN_TOURQE_DEACCELERATIN )) MIN_TOURQE_DEACCELERATIN=10.0; /*minimum tourqe at of [rad/sec]*/ 
     
     ANGULAR_ACCELERATION = (MAX_TOURQE - MIN_TOURQE) / ACCELERATION_TIME;
 
-
+    /*connection between linear velocity to rotation V=w/R
+    connection between RPM to w w=2*PI*RPM/60*/
 
     left_wheel_2_velocity_controller_command_pub = node_handle->advertise<std_msgs::Float64>("my_robot_model/left_wheel_2_hinge_joint_velocity_controller/command", 10);
     left_wheel_velocity_controller_command_pub = node_handle->advertise<std_msgs::Float64>("my_robot_model/left_wheel_hinge_joint_velocity_controller/command", 10);
@@ -82,7 +83,6 @@ public:
     mIn_turn.data = false;
     mWheelRadius = 0.05;
     mTimeAtAheadDriveStart = ros::Time::now();
-
     return mIsAlive;
     SAMPLE_TIME=0.033;
     mLastVel=0;
@@ -110,6 +110,8 @@ private:
   int mCount;
   double mWheelRadius;
   ros::Time mTimeAtAheadDriveStart;
+  //---------------------------------------
+  //control parameters:
   double  MAX_TOURQE ;
   double  MIN_TOURQE ;
   double  ACCELERATION_TIME ;
@@ -119,7 +121,7 @@ private:
   double MIN_TOURQE_DEACCELERATIN;
   double  SAMPLE_TIME;
   double  ANGULAR_ACCELERATION ;
-
+  //---------------------------------------
   void mainLoop()
   {
     ros::Rate rate(30);
@@ -130,12 +132,11 @@ private:
       curr_dist_pub.publish(mCurr_distance);
       cmd_dist_pub.publish(mDistance_cmd);
 
-      // spin around till bearing measurement = bearing command
 
+      // spin around till bearing measurement = bearing command
       if (abs(mBearing_cmd - mBearing_cmdPrev) > BEARING_ERROR)
       {
         // a new target point has arrived from the path planning:
-
         mStartDrivingAhead = false;
       }
 
@@ -145,10 +146,8 @@ private:
         mIn_turn.data = true;
         calcVelCmdTurn();
       }
-
       else // start driving ahead
       {
-
         if (mCount == 0)
         {
           mTimeAtAheadDriveStart = ros::Time::now();
@@ -160,7 +159,6 @@ private:
       }
 
       // wheels control:
-
       left_wheel_2_velocity_controller_command_pub.publish(mVel_cmd_left);
       left_wheel_velocity_controller_command_pub.publish(mVel_cmd_left);
       right_wheel_2_velocity_controller_command_pub.publish(mVel_cmd_right);
@@ -175,14 +173,12 @@ private:
   //===================================
   void calcVelCmdDrivingAhead()
   {
-
     double dt = ros::Time::now().toSec() - mTimeAtAheadDriveStart.toSec();
 
     if (mCurr_distance.data + DISTANCE_ERROR < mDistance_cmd.data) //drive while ditance to target >1 [meter]
     {
-      if (mCurr_distance.data +  DECELERATION_DISTANCE < mDistance_cmd.data) //max torque while distance to target > 5[meter]
+      if (mCurr_distance.data +  DECELERATION_DISTANCE < mDistance_cmd.data) //max torque while distance to target > 30[meter]
       {
-
         if (dt <= ACCELERATION_TIME) //acceleration
         {
           mVel_cmd_left.data = std::min(MIN_TOURQE+ ANGULAR_ACCELERATION * dt, MAX_TOURQE);
@@ -198,10 +194,9 @@ private:
       {
         mVel_cmd_left.data =std::max(mVel_cmd_left.data - 2*ANGULAR_ACCELERATION  * 0.03, MIN_TOURQE);
         mVel_cmd_right.data =std::max(mVel_cmd_right.data - 2*ANGULAR_ACCELERATION  * 0.03, MIN_TOURQE);
-
       }
     }
-    else //stop
+    else //stop - distance to target < DISTANCE_ERROR
     {
       mVel_cmd_left.data = 0;
       mVel_cmd_right.data = 0;
@@ -209,28 +204,24 @@ private:
     std_msgs::Float64 y;
     y.data = mVel_cmd_left.data;
     dt_pub.publish(y);
-    //mLastVel=
   }
 
   void calcVelCmdTurn()
   {
-    /*deceleration*/
+    /*deceleration */
 
     if (abs(mVel_cmd_left.data) > MIN_TOURQE)
     {
+      //deceleration command:
       mVel_cmd_left.data = mVel_cmd_left.data - 2*ANGULAR_ACCELERATION  * 0.03;
       mVel_cmd_right.data = mVel_cmd_left.data -2*ANGULAR_ACCELERATION  * 0.03;
-
     }
     else  // turn to the bearing angle command
     {
-
-
       if (abs(mBearing_cmd - mBearing_imu_meas) < 180)
       {
         if (mBearing_cmd > mBearing_imu_meas)
         {
-
           mVel_cmd_left.data = -MIN_TOURQE;
           mVel_cmd_right.data = MIN_TOURQE;
         }
@@ -240,13 +231,10 @@ private:
           mVel_cmd_right.data = -MIN_TOURQE;
         }
       }
-
       else
       {
-
         if (mBearing_cmd > mBearing_imu_meas)
         {
-
           mVel_cmd_left.data = MIN_TOURQE;
           mVel_cmd_right.data = -MIN_TOURQE;
         }
@@ -258,14 +246,13 @@ private:
       }
     }
   }
-
   //***********************************
   // Callback functions
   //***********************************
 
   void path_callback(const geometry_msgs::Pose2D &msg)
   {
-    if (msg.x <= 500) // legal command
+    if (msg.x <= 500) // legal command is <= 500[meter] distance from current robot position.
     {
       mBearing_cmdPrev = mBearing_cmd;
       // float64 x
@@ -277,7 +264,7 @@ private:
       mXinit = mX;
       mYinit = mY;
     }
-    else
+    else //illegal command -  stay at current position:
     {
       mBearing_cmd = mBearing_imu_meas;
       mDistance_cmd.data = 0;

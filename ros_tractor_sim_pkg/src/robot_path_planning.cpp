@@ -59,7 +59,7 @@ private:
         double bearing = calc_bearing(mRobot_init_location.latitude, mRobot_init_location.longitude, mTarget_location.latitude, mTarget_location.longitude);
         double distance = calc_distance(mRobot_init_location.latitude, mRobot_init_location.longitude, mTarget_location.latitude, mTarget_location.longitude);
         geometry_msgs::Pose2D robot2target_pose;
-        robot2target_pose.theta = bearing;
+        robot2target_pose.theta = bearing+180;
         robot2target_pose.x = distance; //*cos(robot2target_pose.theta);
         robot2target_pose.y = distance; //*sin(robot2target_pose.theta);
         robot_target_path_pub.publish(robot2target_pose);

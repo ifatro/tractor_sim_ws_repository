@@ -37,7 +37,7 @@
 
   
   
-  
+  <!-- IMU -->
     <gazebo>
     <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
       <alwaysOn>true</alwaysOn>
@@ -70,7 +70,7 @@
 </gazebo>
 -->
 
-  
+   <!-- GROUND TRUTH --> 
   <gazebo>
   <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
     <alwaysOn>true</alwaysOn>
@@ -84,6 +84,8 @@
   </plugin>
 </gazebo>
 
+  <!-- GPS -->
+
          <gazebo>
          <plugin name="hector_gps" filename="libhector_gazebo_ros_gps.so">
            <robotNamespace>/my_robot_model</robotNamespace>
@@ -93,7 +95,8 @@
            <topicName>gps</topicName>
            <velocityTopicName>gps/velocity</velocityTopicName>
          </plugin>
-       </gazebo>     
+       </gazebo>    
+        
   <!-- ROS Control plugin for Gazebo -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

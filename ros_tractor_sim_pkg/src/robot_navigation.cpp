@@ -121,7 +121,7 @@ public:
     double dt = msg.header.stamp.toSec() - mImuTimeprev;
     mYawmeasImu = (tf::getYaw(msg.orientation)) * RAD2DEG;
     std_msgs::Float64 pub_msg;
-    pub_msg.data = mYawmeasImu;
+    pub_msg.data = mYawmeasImu+180;
     robot_bearing_pub.publish(pub_msg);
 
     nav_msgs::Odometry imu_extract;
