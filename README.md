@@ -138,6 +138,12 @@ world.launch - launches the tractor model and the world in the gazebo environmen
 tractor_sim.launch - launches the ROS noes, parameters and GUI.
 Then both the GAZEBO and the GUI are opened and the simulation can run.
 
+Recorded video
+----------------------------------------
+The attached recorded video demonstrates the initialization and running of the
+simulation.
+[simulation video](https://clipchamp.com/watch/ocRPANDYDfi)https://clipchamp.com/watch/ocRPANDYDfi
+
 
 
 
