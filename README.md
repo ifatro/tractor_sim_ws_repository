@@ -142,8 +142,7 @@ Recorded video
 ----------------------------------------
 The attached recorded video demonstrates the initialization and running of the
 simulation.
-[simulation video](https://clipchamp.com/watch/ocRPANDYDfi)https://clipchamp.com/watch/ocRPANDYDfi
-
+[simulation video](https://clipchamp.com/watch/ocRPANDYDfi)
 
 
 
