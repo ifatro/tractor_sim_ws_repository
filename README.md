@@ -29,8 +29,11 @@ https://github.com/ifatro/tractor_sim_ws_repository.git
 The source code includes:
 
 gazebo_tractor_sim_pkg ; 
+
 ros_tractor_sim_pkg ; 
+
 CMakeLists.txt ; 
+
 README.md ; 
 
 In order to run the simulation all 1-4 need to be downloaded under a Workspace/src folder and source the workspace to the bashrc.
