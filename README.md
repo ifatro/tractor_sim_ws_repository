@@ -79,9 +79,9 @@ file:robot_sim_ground_truth.cpp.
 
 Publishers and subscribers of each node:
 ----------------------------------------
-/target_location;
-/robot_location;
-/robot_path_planning_node;
+/target_location; 
+/robot_location; 
+/robot_path_planning_node; 
 /robot_target_path;
 /robot_estimated_location;
 /in_turn;
